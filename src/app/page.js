@@ -1,9 +1,11 @@
+import Hero from "@/components/Hero";
 
 export default function Home() {
 
   return (
     <>
-      <h1 className="text-9xl font-bold text-gray-600">Saiful Islam</h1>
+    <Hero></Hero>
+      <h1 className="pt-20 text-9xl font-bold text-gray-600">Saiful Islam</h1>
       <br />
       <p className="italic">Frontend Developer</p>
       <br />
