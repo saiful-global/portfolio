@@ -15,37 +15,13 @@ export default function Header() {
           <Image src="/saiful.jpeg" alt="Logo" width={36} height={36} className="rounded-full"></Image>
         </Link>
 
-        {/* Dropdown */}
-        <div className="group relative">
-          <button className="relative overflow-hidden rounded-full px-6 py-2 transition group-hover:text-white">
-            {/* sliding background */}
-            <span className="absolute inset-x-0 bottom-0 h-0 bg-white/30 transition-all duration-500 group-hover:h-full" />
-            <span className="relative">Projects</span>
-          </button>
-
-          <div className="invisible absolute left-0 top-full pt-4 opacity-0 transition duration-200 group-hover:visible group-hover:opacity-100">
-            <ul className="w-48 rounded-2xl border border-white/10 bg-neutral-900/80 p-2 backdrop-blur-xl">
-              {projects.map((name) => (
-                <li key={name}>
-                  <Link
-                    href="/projects"
-                    className="block rounded-xl px-4 py-2 transition hover:bg-white/10 hover:text-sky-400"
-                  >
-                    {name}
-                  </Link>
-                </li>
-              ))}
-              <li className="mt-1 border-t border-white/10 pt-1">
-                <Link
-                  href="/projects"
-                  className="block rounded-xl px-4 py-2 transition hover:bg-white/10 hover:text-sky-400"
-                >
-                  All Projects
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <Link
+          href="/projects"
+          className="group relative overflow-hidden rounded-full px-6 py-2 transition hover:text-white"
+        >
+          <span className="absolute inset-x-0 bottom-0 h-0 bg-white/30 transition-all duration-500 group-hover:h-full" />
+          <span className="relative">Projects</span>
+        </Link>
 
         <a href="#about" className="group relative overflow-hidden rounded-full px-6 py-2 transition hover:text-white">
           <span className="absolute inset-x-0 bottom-0 h-0 bg-white/30 transition-all duration-500 group-hover:h-full" />

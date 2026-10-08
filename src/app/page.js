@@ -5,10 +5,6 @@ export default function Home() {
   return (
     <>
     <Hero></Hero>
-      <h1 className="pt-20 text-9xl font-bold text-gray-600">Saiful Islam</h1>
-      <br />
-      <p className="italic">Frontend Developer</p>
-      <br />
       <p>Mobile: +88015300-76509 (<span className="text-green-600">Whatsapp</span> / <span className="text-blue-400">imo</span>)</p>
       <p className="text-gray-400 hover:text-white transition-all duration-300">Mobile: +88019145-92970</p>
       <br />
