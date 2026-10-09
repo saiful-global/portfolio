@@ -23,10 +23,10 @@ export default function Hero() {
         <div className="flex flex-col gap-2 text-center md:text-left pb-30">
           <h3 className="text-2xl text-yellow-600">Hello,</h3>
           <p className="text-2xl text-yellow-600">________ I&apos;m</p>
-          <p className="text-7xl italic pb-5">Saiful Islam <span className="text-white/40">Bappi</span></p>
+          <p className="text-8xl section-title font-bold italic pb-5">Saiful Islam <span className="text-white/40">Bappi</span></p>
 
           <div className="bg-linear-to-r from-black py-1">
-            <h1 className="text-2xl text-gray-400 pl-5 pb-1">Professional <span className="text-red-700">Web Developer</span></h1>
+            <h1 className="text-2xl text-gray-400 pl-5 pb-1">Professional <span className=" text-shimmer">Web Developer</span></h1>
             <p className="text-xl pl-5 text-gray-400"> <span className="animate-pulse text-white">Frontend</span> Specialist</p>
           </div>
         </div>
