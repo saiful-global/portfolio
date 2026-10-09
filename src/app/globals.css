@@ -34,3 +34,16 @@
   animation: blob 8s ease-in-out infinite, float 6s ease-in-out infinite;
 }
 
+
+
+
+/* Mouse Scroll Indicator animation */
+@keyframes scroll-dot {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-4px); }
+  70%      { transform: translateY(16px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-dot { animation: none; }
+}

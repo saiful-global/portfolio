@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ScrollIndicator from "./common/ScrollIndicator";
 
 export default function Hero() {
   return (
@@ -39,6 +40,10 @@ export default function Hero() {
           className="h-48 w-48 animate-hero object-cover sm:h-64 sm:w-64 md:h-96 md:w-96"
         />
       </div>
+      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
+        <ScrollIndicator />
+      </div>
+      
     </section>
   );
 }
