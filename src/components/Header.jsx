@@ -16,19 +16,19 @@ export default function Header() {
         </Link>
 
         <Link
-          href="/projects"
+          href="/#projects"
           className="group relative overflow-hidden rounded-full px-6 py-2 transition hover:text-white"
         >
           <span className="absolute inset-x-0 bottom-0 h-0 bg-white/30 transition-all duration-500 group-hover:h-full" />
           <span className="relative">Projects</span>
         </Link>
 
-        <a href="#about" className="group relative overflow-hidden rounded-full px-6 py-2 transition hover:text-white">
+        <a href="/#about" className="group relative overflow-hidden rounded-full px-6 py-2 transition hover:text-white">
           <span className="absolute inset-x-0 bottom-0 h-0 bg-white/30 transition-all duration-500 group-hover:h-full" />
           <span className="relative">About</span>
         </a>
         
-        <a href="#contact" className="group relative overflow-hidden rounded-full px-6 py-2 transition hover:text-white">
+        <a href="/#contact" className="group relative overflow-hidden rounded-full px-6 py-2 transition hover:text-white">
           <span className="absolute inset-x-0 bottom-0 h-0 bg-white/30 transition-all duration-500 group-hover:h-full" />
           <span className="relative">Contact</span>
         </a>
