@@ -4,11 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 /*
-  প্রতিটা project এর জন্য বদলাও:
-  - image:    public/projects/ এ screenshot রাখো, যেমন "/projects/uomo.webp"
-              কার্ড লম্বা (portrait), তাই ফোনের মাপে (প্রস্থ ~390px) তোলা screenshot সবচেয়ে ভালো
-  - position: ছবির কোন অংশ দেখাবে ("top", "center", "bottom")
-  - live / github: আসল link
+  - position: ("top", "center", "bottom")
   নতুন project যোগ করতে শুধু array তে একটা object add 
 */
 const AUTO_SCROLL = true; // false করলে নিজে চলা বন্ধ
@@ -18,38 +14,38 @@ const projects = [
   {
     name: "Uomo",
     description: "E-commerce website frontend.",
-    tech: ["React", "Vite", "Tailwind CSS", "Firebase"],
-    image: "",
+    tech: ["React", "Vite", "Tailwind CSS", "React Router"],
+    image: "/projects/uomo.jpg",
     position: "top",
-    live: "#", // TODO: Uomo এর live link
-    github: "https://github.com/saiful-global", // TODO: repo এর সরাসরি link
+    live: "https://uomo-saiful.vercel.app/",
+    github: "https://github.com/saiful-global/Uomo",
   },
   {
     name: "Agenc",
     description: "Agency website frontend.",
-    tech: [], // TODO
-    image: "",
+    tech: [],
+    image: "/projects/Agenc.jpg",
     position: "top",
-    live: "#", // TODO
-    github: "https://github.com/saiful-global", // TODO
-  },
-  {
-    name: "CoreWave",
-    description: "Website frontend.", // TODO: এক লাইনে বর্ণনা
-    tech: [], // TODO
-    image: "",
-    position: "top",
-    live: "#", // TODO
-    github: "https://github.com/saiful-global", // TODO
+    live: "https://agenc-saiful.vercel.app/",
+    github: "https://github.com/saiful-global/Agenc",
   },
   {
     name: "Nexcent",
-    description: "Landing page frontend.",
-    tech: [], // TODO
-    image: "",
+    description: "Website frontend.",
+    tech: [],
+    image: "/projects/Nexcent.jpg",
     position: "top",
-    live: "#", // TODO
-    github: "https://github.com/saiful-global", // TODO
+    live: "https://agenc-saiful.vercel.app/",
+    github: "https://github.com/saiful-global/Nexcent",
+  },
+  {
+    name: "Creative-Agency",
+    description: "Landing page frontend.",
+    tech: [],
+    image: "/projects/Creative-Agency.jpg",
+    position: "top",
+    live: "https://saiful-global.github.io/Creative-Agency/",
+    github: "https://github.com/saiful-global/Creative-Agency",
   },
 ];
 
@@ -61,7 +57,7 @@ function GitHubIcon({ className }) {
   );
 }
 
-// বর্গক্ষেত্রের ভেতর থেকে তীর বেরোনো icon, মানে "নতুন tab এ খুলবে"
+// External Icon
 function ExternalIcon({ className }) {
   return (
     <svg
@@ -108,7 +104,7 @@ function ProjectCard({ project, duplicate = false }) {
       aria-hidden={duplicate || undefined}
       className="group relative h-[440px] w-[72vw] max-w-[280px] shrink-0 overflow-hidden rounded-[2rem] bg-neutral-900 shadow-2xl sm:h-[480px] sm:w-[360px] sm:max-w-none"
     >
-      {/* ছবি: পুরো কার্ড জুড়ে, কোনো padding বা border নেই */}
+      {/* Image */}
       {image ? (
         <Image
           src={image}
@@ -122,7 +118,7 @@ function ProjectCard({ project, duplicate = false }) {
         <div className="absolute inset-0 bg-gradient-to-br from-sky-500/40 via-violet-500/30 to-fuchsia-500/40" />
       )}
 
-      {/* Live চিহ্ন */}
+      {/* Live Badge */}
       <span className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full bg-black/30 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70 motion-reduce:animate-none" />
@@ -131,7 +127,7 @@ function ProjectCard({ project, duplicate = false }) {
         Live
       </span>
 
-      {/* নিচের কাচের স্তর: ওপরের দিকে ধীরে মিলিয়ে গেছে, কোনো কড়া ধার নেই */}
+      {/* glassmorphism blur layer */}
       <div className="absolute inset-x-0 bottom-0 z-10">
         <div
           aria-hidden="true"
@@ -163,7 +159,7 @@ function ProjectCard({ project, duplicate = false }) {
             <p className="mt-1 text-sm text-white/80">{description}</p>
           )}
 
-          {/* বাটন উপর-নিচে: Live Preview আগে, GitHub তার নিচে */}
+          {/* Liver Preview & Github Button */}
           <div className="mt-4 grid gap-2">
             <a
               href={live}
@@ -255,7 +251,7 @@ export default function Projects() {
       // scroll নাড়ালে তার জায়গা থেকেই এগোই
       if (el.scrollLeft !== lastSet) pos = el.scrollLeft;
 
-      // বাটনের নরম নড়াচড়া
+      // বাটনের smooth নড়াচড়া
       const ease = c.remaining * (1 - Math.exp(-dt * 8));
       c.remaining = Math.abs(c.remaining) < 0.5 ? 0 : c.remaining - ease;
 
@@ -309,7 +305,7 @@ export default function Projects() {
           )}
         </div>
 
-        {/* বাম-ডান নিয়ন্ত্রণ */}
+        {/* Left/Right Control */}
         <button
           type="button"
           onClick={() => scrollByCard(-1)}
