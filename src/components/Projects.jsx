@@ -1,51 +1,63 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectCoverflow } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
 
 /*
-  - position: ("top", "center", "bottom")
-  নতুন project যোগ করতে শুধু array তে একটা object add 
+  প্রতিটা project এর জন্য বদলাও:
+  - image:    public/projects/ এ screenshot রাখো, যেমন "/projects/uomo.webp"
+              কার্ড লম্বা (portrait), তাই ফোনের মাপে (প্রস্থ ~390px) তোলা screenshot সবচেয়ে ভালো
+  - position: ছবির কোন অংশ দেখাবে ("top", "center", "bottom")
+  - live / github: আসল link
+  নতুন project যোগ করতে শুধু array তে একটা object বাড়াও।
 */
-const AUTO_SCROLL = true; // false করলে নিজে চলা বন্ধ
-const SPEED = 28; // px/সেকেন্ড, কমালে আরও ধীর
+const AUTO_SCROLL = true; // false করলে নিজে চলা বন্ধ, শুধু তীর, ডট আর হাতে টানা
+const AUTO_DELAY = 2800; // এক কার্ড থেকে পরের কার্ডে যাওয়ার আগে কত মিলিসেকেন্ড থামবে
+const SLIDE_MS = 900; // সরে যেতে কত মিলিসেকেন্ড লাগবে (তীর আর ডটেও এটাই)
+
+// 3D effect এর মান: rotate বাড়ালে পাশের কার্ড বেশি হেলবে, depth বাড়ালে বেশি পেছনে যাবে
+const COVERFLOW = { rotate: 38, stretch: 0, depth: 170, modifier: 1, slideShadows: false };
 
 const projects = [
   {
     name: "Uomo",
     description: "E-commerce website frontend.",
-    tech: ["React", "Vite", "Tailwind CSS", "React Router"],
-    image: "/projects/uomo.jpg",
+    tech: ["React", "Vite", "Tailwind CSS", "Firebase"],
+    image: "",
     position: "top",
-    live: "https://uomo-saiful.vercel.app/",
-    github: "https://github.com/saiful-global/Uomo",
+    live: "#", // TODO: Uomo এর live link
+    github: "https://github.com/saiful-global", // TODO: repo এর সরাসরি link
   },
   {
     name: "Agenc",
     description: "Agency website frontend.",
-    tech: [],
-    image: "/projects/Agenc.jpg",
+    tech: [], // TODO
+    image: "",
     position: "top",
-    live: "https://agenc-saiful.vercel.app/",
-    github: "https://github.com/saiful-global/Agenc",
+    live: "#", // TODO
+    github: "https://github.com/saiful-global", // TODO
+  },
+  {
+    name: "CoreWave",
+    description: "Website frontend.", // TODO: এক লাইনে বর্ণনা
+    tech: [], // TODO
+    image: "",
+    position: "top",
+    live: "#", // TODO
+    github: "https://github.com/saiful-global", // TODO
   },
   {
     name: "Nexcent",
-    description: "Website frontend.",
-    tech: [],
-    image: "/projects/Nexcent.jpg",
-    position: "top",
-    live: "https://agenc-saiful.vercel.app/",
-    github: "https://github.com/saiful-global/Nexcent",
-  },
-  {
-    name: "Creative-Agency",
     description: "Landing page frontend.",
-    tech: [],
-    image: "/projects/Creative-Agency.jpg",
+    tech: [], // TODO
+    image: "",
     position: "top",
-    live: "https://saiful-global.github.io/Creative-Agency/",
-    github: "https://github.com/saiful-global/Creative-Agency",
+    live: "#", // TODO
+    github: "https://github.com/saiful-global", // TODO
   },
 ];
 
@@ -57,7 +69,7 @@ function GitHubIcon({ className }) {
   );
 }
 
-// External Icon
+// বর্গক্ষেত্রের ভেতর থেকে তীর বেরোনো icon, মানে "নতুন tab এ খুলবে"
 function ExternalIcon({ className }) {
   return (
     <svg
@@ -104,7 +116,7 @@ function ProjectCard({ project, duplicate = false }) {
       aria-hidden={duplicate || undefined}
       className="group relative h-[440px] w-[72vw] max-w-[280px] shrink-0 overflow-hidden rounded-[2rem] bg-neutral-900 shadow-2xl sm:h-[480px] sm:w-[360px] sm:max-w-none"
     >
-      {/* Image */}
+      {/* ছবি: পুরো কার্ড জুড়ে, কোনো padding বা border নেই */}
       {image ? (
         <Image
           src={image}
@@ -118,7 +130,7 @@ function ProjectCard({ project, duplicate = false }) {
         <div className="absolute inset-0 bg-gradient-to-br from-sky-500/40 via-violet-500/30 to-fuchsia-500/40" />
       )}
 
-      {/* Live Badge */}
+      {/* Live চিহ্ন */}
       <span className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full bg-black/30 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70 motion-reduce:animate-none" />
@@ -127,7 +139,7 @@ function ProjectCard({ project, duplicate = false }) {
         Live
       </span>
 
-      {/* glassmorphism blur layer */}
+      {/* নিচের কাচের স্তর: ওপরের দিকে ধীরে মিলিয়ে গেছে, কোনো কড়া ধার নেই */}
       <div className="absolute inset-x-0 bottom-0 z-10">
         <div
           aria-hidden="true"
@@ -159,7 +171,7 @@ function ProjectCard({ project, duplicate = false }) {
             <p className="mt-1 text-sm text-white/80">{description}</p>
           )}
 
-          {/* Liver Preview & Github Button */}
+          {/* বাটন উপর-নিচে: Live Preview আগে, GitHub তার নিচে */}
           <div className="mt-4 grid gap-2">
             <a
               href={live}
@@ -197,90 +209,45 @@ function ProjectCard({ project, duplicate = false }) {
 }
 
 export default function Projects() {
-  const scrollerRef = useRef(null);
-  const ctl = useRef({ remaining: 0 });
+  const swiperRef = useRef(null);
+  const [reduce, setReduce] = useState(false);
+  const [active, setActive] = useState(0);
+
+  // যাদের device এ "কম নড়াচড়া" চালু, তাদের জন্য নিজে চলা বন্ধ
+  useEffect(() => {
+    setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
 
   const n = projects.length;
-  // দুই সেটের বেশি + screen প্রস্থ ভরাট রাখতে কত কপি লাগবে (project বাড়লে নিজে কমে)
-  const copies = 2 + Math.ceil(2600 / (n * (360 + 24)));
+  // loop চালাতে অনেক কার্ড লাগে; project কম হলে নিজেরাই কপি করে ভরি (ক্রম একই থাকে)
+  const repeat = Math.max(1, Math.ceil(12 / n));
+  const slides = Array.from({ length: repeat }).flatMap((_, copy) =>
+    projects.map((project) => ({ project, copy }))
+  );
 
-  // বাটন চাপলে এক কার্ড পরিমাণ দূরত্ব "বাকি" থাকে, চলার হিসাব সেটা নরমভাবে খরচ করে
-  const scrollByCard = (dir) => {
-    const el = scrollerRef.current;
-    if (!el || !el.children[1]) return;
-    ctl.current.remaining += dir * (el.children[1].offsetLeft - el.children[0].offsetLeft);
+  // ডটে চাপলে সবচেয়ে কাছের ওই project এ যায়
+  const goTo = (i) => {
+    const swiper = swiperRef.current;
+    if (!swiper) return;
+    const total = slides.length;
+    const cur = swiper.realIndex;
+    let delta = (i - (cur % n) + n) % n;
+    if (delta > n / 2) delta -= n;
+    swiper.slideToLoop((cur + delta + total) % total, SLIDE_MS);
   };
-
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const c = ctl.current;
-
-    // এক সেট project এর মোট প্রস্থ (পিক্সেলে)
-    const setWidth = () => {
-      const a = el.children[0];
-      const b = el.children[n];
-      return a && b ? b.offsetLeft - a.offsetLeft : 0;
-    };
-
-    let S = setWidth();
-    el.scrollLeft = S; // মাঝের সেট থেকে শুরু, যেন দুই দিকেই যাওয়া যায়
-    let pos = S;
-    let lastSet = el.scrollLeft;
-
-    const onResize = () => {
-      S = setWidth();
-    };
-    window.addEventListener("resize", onResize);
-
-    // সীমা পেরোলে এক সেট পিছিয়ে/এগিয়ে আনি, তাই কখনো শেষ হয় না
-    const onScroll = () => {
-      if (S <= 0) return;
-      if (el.scrollLeft >= 2 * S) el.scrollLeft -= S;
-      else if (el.scrollLeft <= 0) el.scrollLeft += S;
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let raf;
-    let last = performance.now();
-    const tick = (now) => {
-      const dt = Math.min(now - last, 64) / 1000;
-      last = now;
-
-      // scroll নাড়ালে তার জায়গা থেকেই এগোই
-      if (el.scrollLeft !== lastSet) pos = el.scrollLeft;
-
-      // বাটনের smooth নড়াচড়া
-      const ease = c.remaining * (1 - Math.exp(-dt * 8));
-      c.remaining = Math.abs(c.remaining) < 0.5 ? 0 : c.remaining - ease;
-
-      const auto = AUTO_SCROLL && !reduce ? SPEED * dt : 0;
-      const move = auto + ease;
-
-      if (move !== 0 && S > 0) {
-        pos += move;
-        if (pos >= 2 * S) pos -= S;
-        else if (pos <= 0) pos += S;
-        el.scrollLeft = pos;
-      }
-      lastSet = el.scrollLeft;
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", onResize);
-      el.removeEventListener("scroll", onScroll);
-    };
-  }, [n]);
 
   return (
     <section
       id="projects"
       className="relative scroll-mt-24 overflow-hidden bg-neutral-950/70 py-28 backdrop-blur-sm sm:py-32"
     >
+      <style>{`
+        /* পাশের কার্ডের বাটন কাজ করে না: প্রথমে কার্ড মাঝে আসে, তারপর বাটন */
+        .projects-swiper .swiper-slide:not(.swiper-slide-active) a { pointer-events: none; }
+        .projects-swiper .swiper-slide { transition: opacity 0.5s ease; }
+        .projects-swiper .swiper-slide:not(.swiper-slide-active) { opacity: 0.55; }
+      `}</style>
+
       <h2
         className="px-6 text-center text-5xl font-light tracking-tight text-white sm:text-6xl"
         style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
@@ -288,27 +255,47 @@ export default function Projects() {
         Things I&apos;ve built
       </h2>
 
-      <div className="relative mt-16 sm:mt-20">
-        <div
-          ref={scrollerRef}
-          className="flex gap-6 overflow-x-auto px-6 [-webkit-mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          style={{ scrollBehavior: "auto" }}
-        >
-          {Array.from({ length: copies }).flatMap((_, c) =>
-            projects.map((project) => (
-              <ProjectCard
-                key={`${project.name}-${c}`}
-                project={project}
-                duplicate={c > 0}
-              />
-            ))
-          )}
+      <div className="relative mt-12 sm:mt-16">
+        <div className="[-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+          <Swiper
+            modules={[Autoplay, EffectCoverflow]}
+            className="projects-swiper py-10"
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              setActive(swiper.realIndex % n);
+            }}
+            onSlideChange={(swiper) => setActive(swiper.realIndex % n)}
+            effect="coverflow"
+            coverflowEffect={COVERFLOW}
+            centeredSlides
+            slidesPerView="auto"
+            spaceBetween={8}
+            loop
+            loopPreventsSliding={false}
+            speed={SLIDE_MS}
+            grabCursor
+            slideToClickedSlide
+            autoplay={
+              AUTO_SCROLL && !reduce
+                ? { delay: AUTO_DELAY, disableOnInteraction: false, pauseOnMouseEnter: false }
+                : false
+            }
+          >
+            {slides.map(({ project, copy }) => (
+              <SwiperSlide
+                key={`${project.name}-${copy}`}
+                style={{ width: "auto", height: "auto" }}
+              >
+                <ProjectCard project={project} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
-        {/* Left/Right Control */}
+        {/* বাম-ডান নিয়ন্ত্রণ */}
         <button
           type="button"
-          onClick={() => scrollByCard(-1)}
+          onClick={() => swiperRef.current?.slidePrev(SLIDE_MS)}
           aria-label="Previous project"
           className="absolute left-2 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition hover:bg-white/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:left-6 sm:h-12 sm:w-12"
         >
@@ -316,12 +303,30 @@ export default function Projects() {
         </button>
         <button
           type="button"
-          onClick={() => scrollByCard(1)}
+          onClick={() => swiperRef.current?.slideNext(SLIDE_MS)}
           aria-label="Next project"
           className="absolute right-2 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition hover:bg-white/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-6 sm:h-12 sm:w-12"
         >
           <Chevron dir="right" />
         </button>
+      </div>
+
+      {/* আধুনিক pagination: কাচের গোল পাত্রে ডট, চলতি project এর ডট লম্বা হয়ে যায় */}
+      <div className="mt-4 flex justify-center px-6">
+        <div className="flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl">
+          {projects.map((project, i) => (
+            <button
+              key={project.name}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={`Show ${project.name}`}
+              aria-current={active === i ? "true" : undefined}
+              className={`h-2.5 rounded-full transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+                active === i ? "w-8 bg-white" : "w-2.5 bg-white/35 hover:bg-white/60"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

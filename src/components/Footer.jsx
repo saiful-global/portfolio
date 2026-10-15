@@ -5,10 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 
-// বিশাল নামের জন্য মোটা, চেনা sans-serif (Inter Black)
+// sans-serif (Inter Black) - for big name
 const inter = Inter({ subsets: ["latin"], weight: ["900"] });
 
-// ===== তোমার তথ্য =====
+// ===== তথ্য =====
 const FOOTER_IMAGE = ""; // TODO: public/ এ ছবি রেখে লেখো, যেমন "/footer.webp" (১৯২০px প্রস্থ, ৩০০KB এর নিচে)
 const FOOTER_IMAGE_POSITION = "center"; // "top", "center" বা "bottom"
 
@@ -16,7 +16,7 @@ const EMAIL = "saifulislambappi01@gmail.com";
 const PHONE = "+8801530076509";
 const WHATSAPP = "8801530076509";
 
-// logo সারি: নতুন কিছু যোগ করতে এখানে একটা লাইন বাড়াও (icon টাও নিচের icons এ লাগবে)
+// logo's
 const socials = [
   { key: "facebook", label: "Facebook", brand: "#1877F2", href: "https://www.facebook.com/global.saiful" },
   { key: "linkedin", label: "LinkedIn", brand: "#0A66C2", href: "https://www.linkedin.com/in/saiful-global/" },
@@ -37,7 +37,7 @@ const socials = [
   { key: "github", label: "GitHub", brand: "#c4b5fd", href: "https://github.com/saiful-global" },
 ].filter((l) => l.href);
 
-// ফুটারের বিভাগ: নতুন project বা পাতা হলে শুধু এখানে লাইন বাড়াও, ফুটার নিজে সাজিয়ে নেবে
+// footer category
 const services = ["Figma to React", "Landing pages", "E-commerce frontends", "Business websites"];
 
 const columns = [
@@ -53,7 +53,6 @@ const columns = [
   },
   {
     title: "Projects",
-    // পরে প্রতিটার আলাদা পাতা হলে href বদলে দিও, যেমন "/projects/uomo"
     items: [
       { label: "Uomo", href: "/#projects" },
       { label: "Agenc", href: "/#projects" },
@@ -75,7 +74,7 @@ const columns = [
   },
 ];
 
-// চলন্ত লেখার ফিতা
+// moving text animation
 const ticker = ["Open for freelance work", ...services, "Next.js", "Tailwind CSS", "Let's talk"];
 
 // ===== বিশাল "SAIFUL" লেখার মাপ (Inter Black এর আসল মাপ থেকে হিসাব করা) =====
@@ -204,7 +203,7 @@ export default function Footer() {
         }
       `}</style>
 
-      {/* পেছন: ছবি (পরে তুমি দেবে) + সবসময় ভেসে বেড়ানো রঙিন আলো */}
+      {/* background: image + সবসময় ভেসে বেড়ানো রঙিন আলো */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         {FOOTER_IMAGE && (
           <Image
@@ -275,7 +274,7 @@ export default function Footer() {
 
               <div className="my-10 h-px bg-white/15" />
 
-              {/* বিভাগ */}
+              {/* category */}
               <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
                 {columns.map((col) => (
                   <div key={col.title}>
@@ -293,7 +292,7 @@ export default function Footer() {
 
               <div className="my-10 h-px bg-white/15" />
 
-              {/* নিচের সারি */}
+              {/* bottom row */}
               <div className="flex flex-col items-center justify-between gap-3 text-sm text-white/55 sm:flex-row">
                 <p>
                   &copy; {new Date().getFullYear()} Saiful Islam. All rights reserved.
@@ -304,7 +303,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* সবসময় চলা লেখার ফিতা */}
+        {/* always moving text animation */}
         <div
           aria-hidden="true"
           className="mt-14 overflow-hidden border-y border-white/10 py-5 [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] sm:mt-20"
@@ -328,7 +327,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* পুরো প্রস্থ জুড়ে বিশাল নাম: কালো পটে সাদা */}
+        {/* Big Name*/}
         <div ref={wordRef} className="mt-10 px-3 pb-2 sm:mt-14 sm:px-5 sm:pb-3">
           <svg
             viewBox={`0 0 ${VB_W} ${VB_H}`}
