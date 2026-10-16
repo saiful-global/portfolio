@@ -6,7 +6,7 @@ const projects = ["Uomo", "Agenc", "CoreWave", "Nexcent"];
 export default function Header() {
   return (
     <header className="pointer-events-none fixed top-4 left-0 z-50 flex w-full justify-center px-4">
-      <nav className="pointer-events-auto flex items-center gap-15 rounded-full border border-white/10 bg-white/10 px-6 py-2 text-white shadow-lg backdrop-blur-xl">
+      <nav className="pointer-events-auto flex items-center gap-10 rounded-full border border-white/10 bg-white/10 px-6 py-2 text-white shadow-lg backdrop-blur-xl">
         {/* Logo */}
         <Link
           href="/"
