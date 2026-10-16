@@ -8,10 +8,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 
-/*
-  - position: ছবির কোন অংশ দেখাবে ("top", "center", "bottom")
-*/
-const AUTO_SCROLL = true; // false করলে নিজে চলা বন্ধ
+
+const AUTO_SCROLL = true;
 const AUTO_DELAY = 2000;
 const SLIDE_MS = 600;
 
@@ -28,35 +26,35 @@ const projects = [
     tech: ["React", "Vite", "Tailwind CSS", "Firebase"],
     image: "/projects/uomo.jpg",
     position: "top",
-    live: "#",
-    github: "https://github.com/saiful-global",
+    live: "https://uomo-saiful.vercel.app/",
+    github: "https://github.com/saiful-global/Uomo",
   },
   {
     name: "Agenc",
     description: "Agency website frontend.",
     tech: [],
-    image: "",
+    image: "/projects/Agenc.jpg",
     position: "top",
-    live: "#",
-    github: "https://github.com/saiful-global",
+    live: "https://agenc-saiful.vercel.app/",
+    github: "https://github.com/saiful-global/Agenc",
   },
   {
     name: "CoreWave",
     description: "Website frontend.",
     tech: [],
-    image: "",
+    image: "/projects/Creative-Agency.jpg",
     position: "top",
-    live: "#",
-    github: "https://github.com/saiful-global",
+    live: "https://saiful-global.github.io/Creative-Agency/",
+    github: "https://github.com/saiful-global/Creative-Agency",
   },
   {
     name: "Nexcent",
     description: "Landing page frontend.",
     tech: [],
-    image: "",
+    image: "/projects/Nexcent.jpg",
     position: "top",
-    live: "#",
-    github: "https://github.com/saiful-global",
+    live: "https://saiful-global.github.io/Nexcent/",
+    github: "https://github.com/saiful-global/Nexcent",
   },
 ];
 
@@ -109,10 +107,10 @@ function ProjectCard({ project }) {
       )}
 
       {/* Live badge */}
-      <span className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full bg-black/50 px-3 py-1.5 text-xs font-semibold text-white">
+      <span className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full backdrop-blur-sm bg-black/20 px-3 py-1.5 text-xs font-semibold text-white">
         <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70 motion-reduce:animate-none" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 motion-reduce:animate-none" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
         </span>
         Live
       </span>
@@ -123,7 +121,7 @@ function ProjectCard({ project }) {
           /* আসল কাচ: mask আর backdrop-blur একই element এ, নইলে ঝাপসা কাজ করে না */
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm [mask-image:linear-gradient(to_top,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_top,black_72%,transparent)]"
+            className="absolute inset-0 bg-black/40 backdrop-blur-xs [mask-image:linear-gradient(to_top,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_top,black_72%,transparent)]"
           />
         ) : (
           <div
@@ -155,7 +153,7 @@ function ProjectCard({ project }) {
               {tech.map((t) => (
                 <li
                   key={t}
-                  className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-white/80"
+                  className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-white"
                 >
                   {t}
                 </li>
@@ -171,7 +169,7 @@ function ProjectCard({ project }) {
           </h3>
 
           {description && (
-            <p className="mt-1 text-sm text-white/80">{description}</p>
+            <p className="mt-1 text-sm text-white">{description}</p>
           )}
 
           {/* Button : Live Preview & GitHub */}
@@ -181,11 +179,11 @@ function ProjectCard({ project }) {
               target="_blank"
               rel="noreferrer"
               aria-label={`${name} live preview (opens in a new tab)`}
-              className="flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-emerald-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:py-3"
+              className="flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-linear-to-r from-blue-600 to-pink-600 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:py-3"
             >
               <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70 motion-reduce:animate-none" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 motion-reduce:animate-none" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
               </span>
               Live Preview
               <ExternalIcon className="h-4 w-4" />
@@ -196,11 +194,11 @@ function ProjectCard({ project }) {
               target="_blank"
               rel="noreferrer"
               aria-label={`${name} source code on GitHub (opens in a new tab)`}
-              className="flex items-center justify-center gap-2 rounded-full bg-white/20 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:py-3"
+              className="flex items-center justify-center gap-2 rounded-full bg-black/30 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:py-3"
             >
               <GitHubIcon className="h-[18px] w-[18px]" />
               GitHub
-              <ExternalIcon className="h-4 w-4 text-white/70" />
+              <ExternalIcon className="h-4 w-4 text-white" />
             </a>
           </div>
         </div>
