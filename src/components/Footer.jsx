@@ -38,7 +38,7 @@ const socials = [
 ].filter((l) => l.href);
 
 // footer category
-const services = ["Figma to React", "Landing pages", "E-commerce frontends", "Business websites"];
+const services = ["Figma to React/Next.js", "Landing pages", "E-commerce websites", "Business websites"];
 
 const columns = [
   {
@@ -75,7 +75,7 @@ const columns = [
 ];
 
 // moving text animation
-const ticker = ["Open for freelance work", ...services, "Next.js", "Tailwind CSS", "Let's talk"];
+const ticker = ["Design", "Development", "Maintenance", ...services, "Next.js", "Tailwind CSS", "Let's talk"];
 
 // ===== বিশাল "SAIFUL" লেখার মাপ (Inter Black এর আসল মাপ থেকে হিসাব করা) =====
 const VB_W = 1000;
@@ -191,7 +191,7 @@ export default function Footer() {
         .footer-orb { animation: footer-drift 14s ease-in-out infinite alternate; }
 
         @keyframes footer-marquee { to { transform: translateX(-50%); } }
-        .footer-ticker { animation: footer-marquee 45s linear infinite; }
+        .footer-ticker { animation: footer-marquee 25s linear infinite; }
 
         /* ফোন/ট্যাবলেটে hover নেই, তাই icon গুলো শুরু থেকেই নিজের রঙে */
         @media (hover: none) {
@@ -227,7 +227,7 @@ export default function Footer() {
           style={{ animationDelay: "-9s" }}
         />
 
-        {/* নিচের দিকে ধীরে কালো, যাতে বিশাল নামটা খাঁটি কালোর উপর বসে */}
+        {/* নিচের দিকে ধীরে কালো, যাতে বিশাল নামটা কালোর উপর বসে */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black" />
       </div>
 
