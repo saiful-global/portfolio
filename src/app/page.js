@@ -1,4 +1,5 @@
 import About from "@/components/About";
+import ScrollToTop from "@/components/common/ScrollToTop";
 import Contact from "@/components/Contact";
 import Education from "@/components/Education";
 import Experience from "@/components/Experience";
@@ -17,6 +18,7 @@ export default function Home() {
     <Skills></Skills>
     <Projects></Projects>
     <Contact></Contact>
+    <ScrollToTop></ScrollToTop>
     </>
   );
 }
