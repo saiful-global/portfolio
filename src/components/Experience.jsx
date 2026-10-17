@@ -20,7 +20,7 @@ const experiences = [
     period: "2023 – 2025",
     duration: "2 years",
     summary:
-      "Operated a large, computer-operated 50-ton weighbridge using TS Work weighing software, where the weighing data was kept. Did the calculations in MS Excel.",
+      "Operated a large, computer-operated 50-ton weighbridge using TS Work weighing software, where the weighing data was kept. Did the calculations in Excel.",
     skills: ["TS Work (weighing software)", "MS Excel"],
   },
 ];
@@ -93,7 +93,7 @@ export default function Experience() {
                     </p>
                   </div>
 
-                  <p className="mt-2 max-w-3xl text-xs leading-relaxed text-white/60">{summary}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-white/60">{summary}</p>
 
                   {skills?.length > 0 && (
                     <ul className="mt-2 flex flex-wrap gap-1.5">
