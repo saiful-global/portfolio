@@ -238,7 +238,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative scroll-mt-24 overflow-hidden bg-neutral-950/70 py-28 sm:py-32"
+      className="relative overflow-hidden bg-neutral-950/70 py-28 sm:py-32"
     >
       <style>{`
         .projects-swiper {

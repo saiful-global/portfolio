@@ -59,7 +59,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative scroll-mt-24 bg-neutral-950/70 px-6 py-28 backdrop-blur-sm"
+      className="relative bg-neutral-950/70 px-6 py-28 backdrop-blur-sm"
     >
       <style>{`
         @keyframes about-pop {

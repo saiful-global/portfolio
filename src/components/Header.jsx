@@ -1,7 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
 const projects = ["Uomo", "Agenc", "CoreWave", "Nexcent"];
+
+// On the home page, scroll to the very top ourselves. Next.js only scrolls when the URL changes,
+// so a plain link to "/" does nothing when you are already on "/".
+function handleLogoClick(e) {
+  if (window.location.pathname !== "/") return; // on another page, let the link go to "/" as usual
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  // Remove a leftover "#section" from the address bar without adding a history entry
+  if (window.location.hash) window.history.replaceState(null, "", "/");
+}
 
 export default function Header() {
   return (
@@ -10,18 +22,19 @@ export default function Header() {
         {/* Logo */}
         <Link
           href="/"
+          onClick={handleLogoClick}
           className="flex h-8 w-8 items-center justify-center rounded-full max-[359px]:h-7 max-[359px]:w-7 sm:h-9 sm:w-9"
         >
           <Image src="/saiful.jpeg" alt="Logo" width={36} height={36} className="h-8 w-8 rounded-full object-cover max-[359px]:h-7 max-[359px]:w-7 sm:h-9 sm:w-9"></Image>
         </Link>
 
-        <Link
+        <a
           href="/#projects"
           className="group relative overflow-hidden rounded-full px-2.5 py-2 text-sm transition hover:text-white max-[359px]:px-2 max-[359px]:text-xs min-[400px]:px-3 sm:px-6 sm:text-base"
         >
           <span className="absolute inset-x-0 bottom-0 h-0 bg-white/30 transition-all duration-500 group-hover:h-full" />
           <span className="relative">Projects</span>
-        </Link>
+        </a>
 
         <a href="/#about" className="group relative overflow-hidden rounded-full px-2.5 py-2 text-sm transition hover:text-white max-[359px]:px-2 max-[359px]:text-xs min-[400px]:px-3 sm:px-6 sm:text-base">
           <span className="absolute inset-x-0 bottom-0 h-0 bg-white/30 transition-all duration-500 group-hover:h-full" />

@@ -3,7 +3,7 @@ import ScrollIndicator from "./common/ScrollIndicator";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-svh w-full overflow-x-clip md:h-screen">
+    <section id="hero" className="relative min-h-svh w-full overflow-x-clip md:h-screen">
       {/* background image */}
       <Image
         src="/hero.webp"

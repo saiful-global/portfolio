@@ -331,7 +331,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden bg-neutral-950/70 px-6 py-28 backdrop-blur-sm sm:py-32"
+      className="relative overflow-hidden bg-neutral-950/70 px-6 py-28 backdrop-blur-sm sm:py-32"
     >
       <style>{`
         @keyframes contact-drift {
