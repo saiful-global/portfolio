@@ -36,17 +36,19 @@ export default function ScrollToTop() {
     // - p-4 on mobile makes the button about 46px, a comfortable size for a thumb
     //   (the recommended minimum touch target is about 44px). From 640px it is p-3.
     // - z-40: above the page sections, below the fixed header (z-50).
-    // - Glass style on a dark site: translucent white background, white arrow,
-    //   and on hover the button turns solid white with a black arrow.
+    // - Dark glass: a dark translucent background with a thin white border and a white arrow.
+    //   The dark fill keeps the arrow readable even when the button sits on top of the big white
+    //   "SAIFUL" text in the footer (a border alone would not help, the inside would stay white).
+    // - On hover the button turns emerald with a black arrow, visible on both dark and white areas.
     // - aria-label: gives the icon-only button a name for screen readers.
     <button
       type="button"
       aria-label="Scroll to top"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="group fixed bottom-4 right-4 z-40 rounded-full border border-white/15 bg-white/10 p-4 shadow-xl backdrop-blur-md transition-all hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:bottom-5 sm:right-5 sm:p-3"
+      className="group fixed bottom-4 right-4 z-40 rounded-full border border-white/50 bg-black/40 p-4 shadow-2xl backdrop-blur-sm transition-all hover:border-white/50 hover:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:bottom-5 sm:right-5 sm:p-3"
     >
       <svg
-        className="fill-white group-hover:fill-black"
+        className="fill-white"
         width="14"
         height="14"
         viewBox="0 0 14 14"
